@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CleanRandomGame</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="random">random</string>
+    <string name="confirm">確定</string>
+    <string name="error_input_message">無效的輸入喔</string>
+</resources>
