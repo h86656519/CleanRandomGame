@@ -16,19 +16,20 @@ class SecondViewModel : ViewModel() {
 
         generateCoordinateJob = scope.launch {
             while (true) {
+                delay(10000)
                 val coordinate = getRandomCoordinate(inputX, inputY)
                 println("x: ${coordinate.x} y:${coordinate.y} index:${coordinate.index}")
                 randomNumberLiveData.value = coordinate
 
                 println("index: ${coordinate.index}")
-                delay(10000)
+
             }
         }
     }
 
     fun stopUpdates() {
         generateCoordinateJob?.cancel()
-        generateCoordinateJob = null
+//        generateCoordinateJob = null
     }
 
     private fun getRandomCoordinate(limitX: Int, limitY: Int): Coordinate {

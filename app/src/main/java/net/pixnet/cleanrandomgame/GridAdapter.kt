@@ -9,6 +9,7 @@ import net.pixnet.cleanrandomgame.databinding.GridItemLayoutBinding
 class GridAdapter(private val context: Context, private val row: Int, private val column: Int) :
     RecyclerView.Adapter<GridAdapter.ViewHolder>() {
     var coordinateIndex: Int = -1
+    var hideCordinateIndex: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -20,6 +21,10 @@ class GridAdapter(private val context: Context, private val row: Int, private va
             println("onBindViewHolder: ${position}")
             holder.setItemText()
         }
+
+        if (position == hideCordinateIndex){
+            holder.hideRandomText()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -28,6 +33,11 @@ class GridAdapter(private val context: Context, private val row: Int, private va
 
     fun setItemText(index: Int) {
         this.coordinateIndex = index
+        notifyDataSetChanged()
+    }
+
+    fun sethideRandomIndex(){
+        this.hideCordinateIndex = coordinateIndex
         notifyDataSetChanged()
     }
 
@@ -42,6 +52,10 @@ class GridAdapter(private val context: Context, private val row: Int, private va
             println("position: ${position}")
             println("---------------------")
             binding.tvRandomText.text = context.getString(R.string.random)
+        }
+
+        fun hideRandomText(){
+            binding.tvRandomText.text = ""
         }
     }
 

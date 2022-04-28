@@ -18,6 +18,7 @@ class SecondFragment : Fragment(), View.OnClickListener {
     private var inputRow: Int = 0 //x
     private var inputColumn: Int = 0   //y
     private var lastCoordinateIndex = 0
+    private lateinit var adapter: GridAdapter
 
     companion object {
         @JvmStatic
@@ -54,7 +55,7 @@ class SecondFragment : Fragment(), View.OnClickListener {
     private fun initView() {
         val manager = GridLayoutManager(requireActivity(), inputColumn)
         binding.rvRandom.layoutManager = manager
-        val adapter = GridAdapter(requireActivity(), inputRow, inputColumn)
+        adapter = GridAdapter(requireActivity(), inputRow, inputColumn)
         binding.rvRandom.adapter = GridAdapter(requireActivity(), inputRow, inputColumn)
         binding.rvRandom.adapter = adapter
 
@@ -102,9 +103,15 @@ class SecondFragment : Fragment(), View.OnClickListener {
         btn.isEnabled = true
     }
 
+    fun cleanRandom() {
+        adapter.sethideRandomIndex()
+    }
+
     override fun onClick(v: View?) {
         if (v is Button) {
             viewModel.startUpdates(inputRow, inputColumn)
+            cleanRandom()
+            disableButton()
         }
     }
 }
